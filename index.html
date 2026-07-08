@@ -95,6 +95,10 @@
   }
   button:hover{filter:brightness(0.95)}
   button:disabled{opacity:.6;cursor:default}
+  .consent-label{display:flex;align-items:flex-start;gap:8px;font-size:12.5px;color:var(--ok-green-mid);font-weight:400;line-height:1.5;cursor:pointer}
+  .consent-label input{width:auto;margin-top:3px;flex-shrink:0}
+  .consent-label a{color:var(--ok-green-deep)}
+  .consent{margin-bottom:20px}
   .msg{font-size:13px;margin-top:16px;text-align:center}
   .msg.ok{color:var(--ok-green-mid)}
   .msg.err{color:#A3402D}
@@ -138,6 +142,12 @@
         <option value="" disabled selected>Chargement des formations…</option>
       </select>
     </div>
+    <div class="field consent">
+      <label class="consent-label">
+        <input type="checkbox" id="consent" name="consent" required>
+        <span>J'accepte que L'Okara utilise mes données pour traiter ma demande, conformément à la <a href="/politique-confidentialite.html" target="_blank" rel="noopener">politique de confidentialité</a>.</span>
+      </label>
+    </div>
     <button type="submit" id="submit-btn">Envoyer ma demande</button>
     <p class="msg" id="form-msg" role="status"></p>
   </form>
@@ -176,7 +186,8 @@ document.getElementById('prospect-form').addEventListener('submit', async (e)=>{
     prenom: document.getElementById('prenom').value,
     email: document.getElementById('email').value,
     telephone: document.getElementById('telephone').value,
-    formationId: document.getElementById('formation').value
+    formationId: document.getElementById('formation').value,
+    consent: document.getElementById('consent').checked
   };
 
   try{
